@@ -1,7 +1,9 @@
 const input = document.getElementById("todo-input");
 const btn = document.getElementById("todo-button");
 const list = document.getElementById("todo-list");
-const countEl = document.getElementById("todo-count");
+const pend = document.getElementById("todo-pend");
+const compt = document.getElementById("todo-comp");
+const allTasks = document.getElementById("total-tasks");
 console.log(input, btn, list);
 
 const saved = localStorage.getItem("todos");
@@ -70,12 +72,16 @@ function render() {
     list.appendChild(node);
   });
 }
-function updateCounter() {
-  const remaining = todos.filter((todo) => !todo.completed).length;
-  countEl.textContent = `${remaining} item${
-    remaining !== 1 ? "s" : ""
-  } pending`;
+
+function progress() {
+  const completed = todos.filter((todo) => todo.completed).length;
+  const pending = todos.length - completed;
+
+  pend.textContent = `Pending Tasks ==> ${pending}`;
+  compt.textContent = `Completed Tasks ==> ${completed}`;
+  allTasks.textContent = `Total Tasks ==> ${todos.length}`;
 }
+
 function addTodo() {
   const text = input.value.trim();
   if (text === "") {
@@ -98,6 +104,6 @@ input.addEventListener("keydown", (e) => {
 function update() {
   saveTodos();
   render();
-  updateCounter();
+  progress();
 }
 update();
