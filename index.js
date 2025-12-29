@@ -14,9 +14,11 @@ function saveTodos() {
 function createTodoNode(todo, index) {
   // create elements here
   const li = document.createElement("li");
+  li.classList.add("lists");
 
   // creating checkbox
   const checkbox = document.createElement("input");
+  checkbox.classList.add("checkbox");
   checkbox.type = "checkbox";
   checkbox.checked = !!todo.completed;
   checkbox.addEventListener("change", () => {
@@ -46,6 +48,7 @@ function createTodoNode(todo, index) {
 
   // creating a delete Button
   const delBtn = document.createElement("button");
+  delBtn.classList.add("delete-button");
   delBtn.textContent = "Delete";
   delBtn.addEventListener("click", () => {
     todos.splice(index, 1);
