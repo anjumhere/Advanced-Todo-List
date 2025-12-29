@@ -92,7 +92,10 @@ h2 {
 #todo-input:focus {
   border-color: #4f7cff;
 }
-
+#todo-input:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
 /* =========================
    6. ADD BUTTON
    ========================= */
@@ -109,6 +112,8 @@ h2 {
 
 #todo-button:hover {
   background: #3c63d9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 /* =========================
@@ -172,6 +177,8 @@ li button {
 
 li button:hover {
   background: #e04747;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 /* =========================

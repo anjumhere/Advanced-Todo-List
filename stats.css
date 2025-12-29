@@ -10,3 +10,21 @@
   flex-direction: column;
   align-items: center;
 }
+
+#completed-btn {
+  padding: 7px 14px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  outline: none;
+  border-radius: 12px;
+  background-color: white;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#completed-btn:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
