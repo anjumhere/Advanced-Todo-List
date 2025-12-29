@@ -49,7 +49,7 @@ This project is especially useful for:
   <li>Vanilla JavaScript for logic and interactivity</li>
   <li>Browser localStorage for data persistence</li>
 </ul>
- <h2>ScreenShot</h2>
+ <h2>Screenshot of the Project</h2>
  <img src="images/Screenshot from 2025-12-29 21-04-58.png" alt="">
 <h2>Project Structure</h2>
 <pre>
