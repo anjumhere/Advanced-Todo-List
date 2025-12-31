@@ -1,7 +1,3 @@
-/* =========================
-   1. CSS RESET
-   ========================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -15,8 +11,8 @@
 body {
   min-height: 100vh;
   display: flex;
-  justify-content: center; /* center horizontally */
-  align-items: flex-start; /* start from top */
+  justify-content: center;
+  align-items: flex-start;
   padding-top: 60px;
   background: #f5f7fa;
   font-family: system-ui, sans-serif;
@@ -28,7 +24,7 @@ body {
 
 .main-container {
   width: 100%;
-  max-width: 420px; /* limits width on large screens */
+  max-width: 420px;
   background: #ffffff;
   border-radius: 20px;
   padding: 24px;
@@ -59,8 +55,6 @@ h2 {
   font-size: 0.95rem;
   margin: 4px 0;
   font-family: monospace;
-
-  /* border: 1px solid grey; */
 }
 #total-tasks {
   text-align: center;
@@ -81,7 +75,7 @@ h2 {
 }
 
 #todo-input {
-  flex: 1; /* input takes remaining space */
+  flex: 1;
   padding: 12px 14px;
   border-radius: 20px;
   border: 1px solid #ccc;
@@ -96,6 +90,7 @@ h2 {
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
+
 /* =========================
    6. ADD BUTTON
    ========================= */
@@ -130,12 +125,27 @@ ul {
 
 li {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
   padding: 10px;
   border-radius: 12px;
   margin-bottom: 8px;
   background: #f9f9f9;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.todo-main-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* =========================
@@ -155,34 +165,164 @@ li input[type="checkbox"] {
   font-size: 0.95rem;
 }
 
-/* Completed state */
 .todo-text.completed {
   text-decoration: line-through;
   opacity: 0.6;
 }
 
 /* =========================
-   11. DELETE BUTTON
+   11. BUTTONS
    ========================= */
 
 li button {
   padding: 6px 10px;
   border-radius: 12px;
   border: none;
-  background: #ff5a5a;
   color: white;
   cursor: pointer;
   font-size: 0.8rem;
 }
 
-li button:hover {
+.delete-button {
+  background: #ff5a5a;
+}
+
+.delete-button:hover {
   background: #e04747;
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
+.edit-button {
+  background: #4f7cff;
+}
+
+.edit-button:hover {
+  background: #3c63d9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
 /* =========================
-   12. MOBILE OPTIMIZATION
+   12. TIMER SECTION
+   ========================= */
+
+.timer-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.timer-input {
+  width: 50px;
+  padding: 4px 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.timer-display {
+  font-family: monospace;
+  font-weight: bold;
+  color: #333;
+  min-width: 60px;
+}
+
+.timer-display.running {
+  color: #4f7cff;
+}
+
+.timer-display.finished {
+  color: #22c55e;
+}
+
+.timer-btn {
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: none;
+  background: #4f7cff;
+  color: white;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.timer-btn:hover {
+  background: #3c63d9;
+}
+
+.timer-btn.stop {
+  background: #ff5a5a;
+}
+
+.timer-btn.stop:hover {
+  background: #e04747;
+}
+
+/* =========================
+   13. HOVER TOOLTIP
+   ========================= */
+
+.hover-tooltip {
+  position: absolute;
+  top: 5px;
+  left: 105%;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  min-width: 250px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.todo-main-row:hover ~ .hover-tooltip {
+  opacity: 1;
+}
+
+.tooltip-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 20px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4f7cff, #3c63d9);
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.tooltip-details {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* =========================
+   14. MOBILE OPTIMIZATION
    ========================= */
 
 @media (max-width: 480px) {
@@ -198,31 +338,28 @@ li button:hover {
   h2 {
     font-size: 1.4rem;
   }
+
+  .hover-tooltip {
+    left: auto;
+    right: 105%;
+    min-width: 200px;
+    padding: 12px;
+  }
 }
+
 /* Edit input styling */
 .edit-input {
   width: 65%;
   padding: 6px 10px;
   font-size: 0.95rem;
-
   border: 1px solid #ccc;
   border-radius: 6px;
-
   outline: none;
   background-color: #fff;
-
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Focus effect */
 .edit-input:focus {
   border-color: #4a90e2;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.15);
-}
-
-/* Smooth replace animation (optional but nice) */
-.lists {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
