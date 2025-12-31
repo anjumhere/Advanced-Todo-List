@@ -199,3 +199,30 @@ li button:hover {
     font-size: 1.4rem;
   }
 }
+/* Edit input styling */
+.edit-input {
+  width: 65%;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  outline: none;
+  background-color: #fff;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus effect */
+.edit-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.15);
+}
+
+/* Smooth replace animation (optional but nice) */
+.lists {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

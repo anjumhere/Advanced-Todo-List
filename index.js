@@ -4,6 +4,7 @@ const list = document.getElementById("todo-list");
 const pend = document.getElementById("todo-pend");
 const compt = document.getElementById("todo-comp");
 const allTasks = document.getElementById("total-tasks");
+const clearStats = document.getElementById("completed-btn");
 console.log(input, btn, list);
 
 const saved = localStorage.getItem("todos");
@@ -37,17 +38,6 @@ function createTodoNode(todo, index) {
     textSpan.style.textDecoration = "line-through";
   }
 
-  // creating edit functionality
-  textSpan.addEventListener("dblclick", () => {
-    const newText = prompt("Edit todo", todo.text);
-    if (newText !== null && newText.trim()) {
-      todo.text = newText;
-      textSpan.textContent = todo.text;
-
-      update();
-    }
-  });
-
   // creating a delete Button
   const delBtn = document.createElement("button");
   delBtn.classList.add("delete-button");
@@ -57,11 +47,45 @@ function createTodoNode(todo, index) {
 
     update();
   });
+  // creating edit button
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  editBtn.classList.add("edit-button");
+  editBtn.addEventListener("click", () => {
+    editTodo(index);
+  });
 
   li.appendChild(checkbox);
   li.appendChild(textSpan);
+  li.appendChild(editBtn);
   li.appendChild(delBtn);
   return li;
+}
+function editTodo(index) {
+  const li = list.children[index];
+  const todo = todos[index];
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = todo.text;
+  input.classList.add("edit-input");
+
+  li.querySelector(".todo-text").replaceWith(input);
+  input.focus();
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const newText = input.value.trim();
+      if (newText) {
+        todo.text = newText;
+        update();
+      }
+    }
+
+    if (e.key === "Escape") {
+      render(); // cancel edit
+    }
+  });
 }
 
 function render() {
@@ -106,4 +130,15 @@ function update() {
   render();
   progress();
 }
+clearStats.addEventListener("click", () => {
+  // clear todos array
+  todos.length = 0;
+
+  // remove from localStorage
+  localStorage.removeItem("todos");
+
+  // update UI
+  update();
+});
+
 update();
