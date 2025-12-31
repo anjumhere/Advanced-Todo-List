@@ -224,12 +224,54 @@ function startTimer(index) {
             update();
           }
         }
+
+        // Update tooltip in real-time
+        updateTooltip(li, todo);
       }
     } else {
       clearInterval(timerIntervals[index]);
       delete timerIntervals[index];
     }
   }, 1000);
+}
+
+function updateTooltip(li, todo) {
+  const tooltip = li.querySelector(".hover-tooltip");
+  if (tooltip) {
+    // Update progress bar
+    const progressFill = tooltip.querySelector(".progress-bar-fill");
+    let percentage = 0;
+    if (todo.completed) {
+      percentage = 100;
+    } else if (todo.timerSet && todo.timerMinutes > 0) {
+      const totalSeconds = todo.timerMinutes * 60;
+      const elapsedSeconds = totalSeconds - todo.timerSeconds;
+      percentage = Math.round((elapsedSeconds / totalSeconds) * 100);
+    } else {
+      percentage = 0;
+    }
+
+    if (progressFill) {
+      progressFill.style.width = `${percentage}%`;
+      progressFill.textContent = `${percentage}%`;
+    }
+
+    // Update tooltip details
+    const tooltipDetails = tooltip.querySelector(".tooltip-details");
+    if (tooltipDetails) {
+      tooltipDetails.innerHTML = `
+        <div>Status: ${todo.completed ? "Completed ✓" : "In Progress"}</div>
+        ${
+          todo.timerSet
+            ? `<div>Time Remaining: ${formatTime(todo.timerSeconds)}</div>`
+            : "<div>No timer set</div>"
+        }
+        ${
+          todo.timerSet ? `<div>Total Time: ${todo.timerMinutes} min</div>` : ""
+        }
+      `;
+    }
+  }
 }
 
 function editTodo(index) {
@@ -276,9 +318,9 @@ function progress() {
   const completed = todos.filter((todo) => todo.completed).length;
   const pending = todos.length - completed;
 
-  pend.textContent = `Pending Tasks ==> ${pending}`;
-  compt.textContent = `Completed Tasks ==> ${completed}`;
-  allTasks.textContent = `Total Tasks ==> ${todos.length}`;
+  document.getElementById("todo-pend").textContent = pending;
+  document.getElementById("todo-comp").textContent = completed;
+  document.getElementById("total-tasks").textContent = todos.length;
 }
 
 function addTodo() {

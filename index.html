@@ -20,12 +20,21 @@
       </div>
     </div>
     <div class="stats">
-      <p id="total-tasks">Items:</p>
-      <p id="todo-pend">Count :</p>
-      <p id="todo-comp">Items:</p>
-      <button id="completed-btn">Clear stats</button>
+      <div class="stat-item">
+        <span class="stat-label">Total Tasks</span>
+        <span class="stat-value" id="total-tasks">0</span>
+      </div>
+      <div class="stat-item pending">
+        <span class="stat-label">Pending</span>
+        <span class="stat-value" id="todo-pend">0</span>
+      </div>
+      <div class="stat-item completed">
+        <span class="stat-label">Completed</span>
+        <span class="stat-value" id="todo-comp">0</span>
+      </div>
+      <button id="completed-btn">Clear All Tasks</button>
     </div>
 
-    <script src="index.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

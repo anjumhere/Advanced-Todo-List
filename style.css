@@ -1,3 +1,7 @@
+/* =========================
+   1. CSS RESET
+   ========================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -14,8 +18,31 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding-top: 60px;
-  background: #f5f7fa;
-  font-family: system-ui, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 20% 50%,
+      rgba(120, 119, 198, 0.3),
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.3), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* =========================
@@ -25,10 +52,12 @@ body {
 .main-container {
   width: 100%;
   max-width: 420px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* =========================
@@ -39,29 +68,36 @@ h2 {
   text-align: center;
   margin-bottom: 8px;
   font-size: 1.6rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
 }
 
 #todo-pend {
   text-align: center;
-  margin-bottom: 20px;
-  color: #555;
+  color: #333;
   font-size: 0.95rem;
   margin: 4px 0;
-  font-family: monospace;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
 }
 #todo-comp {
   text-align: center;
-  color: #555;
+  color: #333;
   font-size: 0.95rem;
   margin: 4px 0;
-  font-family: monospace;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
 }
 #total-tasks {
   text-align: center;
-  color: #555;
+  color: #333;
   font-size: 0.95rem;
   margin: 4px 0;
-  font-family: monospace;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
 }
 
 /* =========================
@@ -78,17 +114,22 @@ h2 {
   flex: 1;
   padding: 12px 14px;
   border-radius: 20px;
-  border: 1px solid #ccc;
+  border: 2px solid rgba(102, 126, 234, 0.2);
   font-size: 0.95rem;
   outline: none;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
 }
 
 #todo-input:focus {
-  border-color: #4f7cff;
+  border-color: #667eea;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 #todo-input:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  border-color: #667eea;
 }
 
 /* =========================
@@ -99,16 +140,19 @@ h2 {
   padding: 12px 18px;
   border-radius: 20px;
   border: none;
-  background: #4f7cff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   font-size: 0.9rem;
   cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
 }
 
 #todo-button:hover {
-  background: #3c63d9;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
 }
 
 /* =========================
@@ -130,9 +174,17 @@ li {
   padding: 10px;
   border-radius: 12px;
   margin-bottom: 8px;
-  background: #f9f9f9;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
   position: relative;
   transition: all 0.3s ease;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+li:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
 }
 
 .lists {
@@ -153,7 +205,38 @@ li {
    ========================= */
 
 li input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
   cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+li input[type="checkbox"]:hover {
+  border-color: #667eea;
+  transform: scale(1.05);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+li input[type="checkbox"]:checked {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+}
+
+li input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 /* =========================
@@ -194,13 +277,13 @@ li button {
 }
 
 .edit-button {
-  background: #4f7cff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .edit-button:hover {
-  background: #3c63d9;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
 }
 
 /* =========================
@@ -234,7 +317,18 @@ li button {
 }
 
 .timer-display.running {
-  color: #4f7cff;
+  color: #667eea;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .timer-display.finished {
@@ -245,14 +339,18 @@ li button {
   padding: 4px 10px;
   border-radius: 8px;
   border: none;
-  background: #4f7cff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   cursor: pointer;
   font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .timer-btn:hover {
-  background: #3c63d9;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
 }
 
 .timer-btn.stop {
@@ -270,7 +368,7 @@ li button {
 .hover-tooltip {
   position: absolute;
   top: 5px;
-  left: 105%;
+  right: 110%;
   background: rgba(255, 255, 255, 0.98);
   border: 1px solid #e0e0e0;
   border-radius: 12px;
@@ -320,10 +418,6 @@ li button {
   color: #666;
   line-height: 1.6;
 }
-
-/* =========================
-   14. MOBILE OPTIMIZATION
-   ========================= */
 
 @media (max-width: 480px) {
   body {
