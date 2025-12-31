@@ -50,7 +50,7 @@ This project is especially useful for:
   <li>Browser localStorage for data persistence</li>
 </ul>
  <h2>Screenshot of the Project</h2>
- <img src="images/Screenshot from 2025-12-29 21-04-58.png" alt="">
+ <img src="images/screenshot.png" alt="">
 <h2>Project Structure</h2>
 <pre>
 todo-app/
