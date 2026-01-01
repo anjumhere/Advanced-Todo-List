@@ -1,7 +1,3 @@
-/* =========================
-   1. CSS RESET
-   ========================= */
-
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 60px;
+  padding: 40px 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
@@ -45,6 +41,25 @@ body > * {
   z-index: 1;
 }
 
+/* Mobile: Stack vertically */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+  }
+
+  /* Stats appear first on mobile */
+  .stats {
+    order: 1;
+  }
+
+  /* Main container appears second */
+  .main-container {
+    order: 2;
+  }
+}
+
 /* =========================
    3. MAIN CONTAINER
    ========================= */
@@ -60,6 +75,15 @@ body > * {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+@media (max-width: 768px) {
+  .main-container {
+    max-width: 100%;
+    padding: 20px 16px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+  }
+}
+
 /* =========================
    4. HEADER
    ========================= */
@@ -73,6 +97,12 @@ h2 {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.4rem;
+  }
 }
 
 #todo-pend {
@@ -110,6 +140,13 @@ h2 {
   margin-bottom: 20px;
 }
 
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
 #todo-input {
   flex: 1;
   padding: 12px 14px;
@@ -119,6 +156,13 @@ h2 {
   outline: none;
   background: rgba(255, 255, 255, 0.9);
   transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  #todo-input {
+    width: 100%;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }
 
 #todo-input:focus {
@@ -149,10 +193,22 @@ h2 {
   transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  #todo-button {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+}
+
 #todo-button:hover {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+#todo-button:active {
+  transform: scale(0.98);
 }
 
 /* =========================
@@ -185,6 +241,16 @@ li:hover {
   background: rgba(255, 255, 255, 0.9);
   transform: translateX(5px);
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+@media (max-width: 768px) {
+  li {
+    padding: 12px;
+  }
+
+  li:hover {
+    transform: none;
+  }
 }
 
 .lists {
@@ -246,6 +312,13 @@ li input[type="checkbox"]:checked::after {
 .todo-text {
   flex: 1;
   font-size: 0.95rem;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .todo-text {
+    font-size: 1rem;
+  }
 }
 
 .todo-text.completed {
@@ -264,6 +337,15 @@ li button {
   color: white;
   cursor: pointer;
   font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  li button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    min-width: 70px;
+  }
 }
 
 .delete-button {
@@ -276,6 +358,10 @@ li button {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
+.delete-button:active {
+  transform: scale(0.95);
+}
+
 .edit-button {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
@@ -284,6 +370,10 @@ li button {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(102, 126, 234, 0.4);
+}
+
+.edit-button:active {
+  transform: scale(0.95);
 }
 
 /* =========================
@@ -298,6 +388,14 @@ li button {
   background: #fff;
   border-radius: 8px;
   font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .timer-section {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }
 
 .timer-input {
@@ -309,11 +407,25 @@ li button {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .timer-input {
+    width: 60px;
+    padding: 6px 8px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
 .timer-display {
   font-family: monospace;
   font-weight: bold;
   color: #333;
   min-width: 60px;
+}
+
+@media (max-width: 768px) {
+  .timer-display {
+    font-size: 1rem;
+  }
 }
 
 .timer-display.running {
@@ -347,10 +459,22 @@ li button {
   transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .timer-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    min-width: 60px;
+  }
+}
+
 .timer-btn:hover {
   background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+.timer-btn:active {
+  transform: scale(0.95);
 }
 
 .timer-btn.stop {
@@ -368,7 +492,7 @@ li button {
 .hover-tooltip {
   position: absolute;
   top: 5px;
-  right: 110%;
+  right: 105%;
   background: rgba(255, 255, 255, 0.98);
   border: 1px solid #e0e0e0;
   border-radius: 12px;
@@ -381,8 +505,52 @@ li button {
   transition: opacity 0.3s ease;
 }
 
-.todo-main-row:hover ~ .hover-tooltip {
-  opacity: 1;
+/* Desktop: Show on hover */
+@media (hover: hover) and (pointer: fine) {
+  .todo-main-row:hover ~ .hover-tooltip {
+    opacity: 1;
+  }
+}
+
+/* Mobile: Show on long press */
+@media (hover: none) and (pointer: coarse) {
+  .hover-tooltip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    min-width: 280px;
+    max-width: 90vw;
+    z-index: 1000;
+  }
+
+  li.show-tooltip .hover-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Add backdrop for mobile tooltip */
+  li.show-tooltip::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 .tooltip-title {
@@ -419,11 +587,11 @@ li button {
   line-height: 1.6;
 }
 
-@media (max-width: 480px) {
-  body {
-    padding-top: 40px;
-  }
+/* =========================
+   14. MOBILE OPTIMIZATION
+   ========================= */
 
+@media (max-width: 768px) {
   .main-container {
     padding: 18px;
     border-radius: 16px;
@@ -433,24 +601,34 @@ li button {
     font-size: 1.4rem;
   }
 
-  .hover-tooltip {
-    left: auto;
-    right: 105%;
-    min-width: 200px;
-    padding: 12px;
+  .todo-main-row {
+    gap: 8px;
+  }
+
+  /* Improve touch targets */
+  li input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
   }
 }
 
 /* Edit input styling */
 .edit-input {
-  width: 65%;
-  padding: 6px 10px;
+  width: 100%;
+  padding: 8px 12px;
   font-size: 0.95rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   outline: none;
   background-color: #fff;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .edit-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 10px 12px;
+  }
 }
 
 .edit-input:focus {

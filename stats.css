@@ -14,6 +14,15 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+@media (max-width: 768px) {
+  .stats {
+    max-width: 100%;
+    margin: 0;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+}
+
 .stat-item {
   width: 100%;
   display: flex;
@@ -26,9 +35,21 @@
   transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .stat-item {
+    padding: 14px 16px;
+  }
+}
+
 .stat-item:hover {
   background: rgba(102, 126, 234, 0.1);
   transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .stat-item:hover {
+    transform: none;
+  }
 }
 
 .stat-item.pending {
@@ -45,6 +66,12 @@
   font-weight: 500;
 }
 
+@media (max-width: 768px) {
+  .stat-label {
+    font-size: 0.95rem;
+  }
+}
+
 .stat-value {
   font-size: 1.5rem;
   font-weight: 700;
@@ -52,6 +79,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@media (max-width: 768px) {
+  .stat-value {
+    font-size: 1.6rem;
+  }
 }
 
 .stat-item.pending .stat-value {
@@ -71,7 +104,7 @@
 /* Clear stats button */
 #completed-btn {
   padding: 12px 24px;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -84,6 +117,13 @@
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  #completed-btn {
+    padding: 14px 24px;
+    font-size: 1rem;
+  }
+}
+
 /* Hover */
 #completed-btn:hover {
   background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
@@ -94,6 +134,13 @@
 /* Active (click feedback) */
 #completed-btn:active {
   transform: scale(0.97);
+}
+
+/* Disabled state (optional, future-proof) */
+#completed-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 /* Disabled state (optional, future-proof) */

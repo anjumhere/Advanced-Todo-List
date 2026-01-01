@@ -12,6 +12,10 @@ const todos = saved ? JSON.parse(saved) : [];
 // Timer intervals storage
 const timerIntervals = {};
 
+// Long press tracking for mobile
+let longPressTimer = null;
+let currentLongPressElement = null;
+
 function saveTodos() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
@@ -22,9 +26,60 @@ function formatTime(seconds) {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
+// Mobile long-press handling
+function handleTouchStart(e, li) {
+  // Don't trigger on buttons or inputs
+  if (e.target.tagName === "BUTTON" || e.target.tagName === "INPUT") {
+    return;
+  }
+
+  currentLongPressElement = li;
+  longPressTimer = setTimeout(() => {
+    li.classList.add("show-tooltip");
+  }, 500); // 500ms long press
+}
+
+function handleTouchEnd(li) {
+  if (longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+  }
+}
+
+function handleTouchMove() {
+  if (longPressTimer) {
+    clearTimeout(longPressTimer);
+    longPressTimer = null;
+  }
+}
+
+// Close tooltip when clicking backdrop
+function closeTooltip(e) {
+  if (
+    e.target.classList.contains("show-tooltip") ||
+    e.target.closest(".hover-tooltip")
+  ) {
+    const openTooltips = document.querySelectorAll(".show-tooltip");
+    openTooltips.forEach((el) => el.classList.remove("show-tooltip"));
+  }
+}
+
 function createTodoNode(todo, index) {
   const li = document.createElement("li");
   li.classList.add("lists");
+
+  // Add touch event listeners for mobile long-press
+  li.addEventListener("touchstart", (e) => handleTouchStart(e, li), {
+    passive: true,
+  });
+  li.addEventListener("touchend", () => handleTouchEnd(li), { passive: true });
+  li.addEventListener("touchmove", handleTouchMove, { passive: true });
+  li.addEventListener("click", (e) => {
+    if (li.classList.contains("show-tooltip")) {
+      li.classList.remove("show-tooltip");
+      e.stopPropagation();
+    }
+  });
 
   // Main row with checkbox, text, and buttons
   const mainRow = document.createElement("div");
